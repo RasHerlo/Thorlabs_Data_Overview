@@ -4,7 +4,7 @@ save_data_on_exit = True
 save_history = True
 save_non_project_files = False
 project_type = 'empty-project-type'
-recent_files = ['Main_Folder_Walk.py', 'TestSample_Cleaning.py', 'Trial_Module.py', 'Trial_Run.py']
+recent_files = ['Main_Folder_Walk.py', 'TaskOverview.md', 'SNR_FTSNR.py', 'TestSample_Cleaning.py', 'Read_TXT_SNRs.py']
 
 [main]
 version = 0.2.0

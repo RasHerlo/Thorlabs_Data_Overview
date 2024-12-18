@@ -9,6 +9,10 @@ import os
 
 data_path = os.path.dirname(os.path.dirname(__file__))
 
+if not os.path.isfile(os.path.join(data_path,'SNR_FTSNR.txt')):
+    print("file does not exist yet")
+    
+
 with open(os.path.join(data_path,'SNR_FTSNR.txt'), 'r') as file:
     content = file.read()
      
