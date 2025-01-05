@@ -7,6 +7,10 @@ Created on Thu Dec 12 16:37:15 2024
 
 # Main: Pick the upper parent folder and walk through all subfolders
 
+## STEP 1: check if stack has been made, make STK
+## STEP 2: check if average has been made, make average .tif file
+
+
 # Function is checking if the target folder is available, and if not,it leaves it with a message.
 # This avoids any overwriting or data-mixing.
 
@@ -85,20 +89,23 @@ for root, _, files in os.walk(rtdir):
             
             ## Step 3: Calculate the SNR and FT-SNR and save as a .txt file?
             # step 3a: Check if file is written
-            parent_path = os.path.dirname(os.path.dirname(__file__))
-            if not os.path.isfile(os.path.join(parent_path,"stats.txt")):
+            # parent_path = os.path.dirname(os.path.dirname(__file__))
+            print(f"Root: {root}")
+            if not os.path.isfile(os.path.join(root,"DATA",chan,"stats.txt")):
                 print("generating stats...")
                 # read the .tif stack
-                tif_stk_avg = read_tif_stack(os.path.join(chandir, f"{chan}_stk_avg.tif"))
+                imagedir = os.path.join(chandir, f"{chan}_stk_avg.tif")
+                print(f"image directory: {imagedir}")
+                tif_stk_avg = read_tif_stack(imagedir)
                 tif_stk_avg_flat = tif_stk_avg.flatten()
-                snr_ft = calculate_snr_frequency_domain(tif_stk_avg_flat)
-                snr_basic = calculate_simple_snr(tif_stk_avg_flat)
+                snr_ft = calculate_snr_frequency_domain(tif_stk_avg)
+                snr_basic = calculate_simple_snr(tif_stk_avg)
                 # write it in the text-file
-                with open(os.path.join(parent_path,'stats.txt'), 'w') as file:
+                with open(os.path.join(root,"DATA",chan,"stats.txt"), 'w') as file:
                     file.write(f'SNR_basic = {snr_basic}\n')
                     file.write(f'SNR_FT = {snr_ft}\n')
-            if os.path.isfile(os.path.join(parent_path,"stats.txt")):
-                with open(os.path.join(parent_path,'stats.txt'), 'r') as file:
+            if os.path.isfile(os.path.join(root,"stats.txt")):
+                with open(os.path.join(root,"stats.txt"), 'r') as file:
                   for line in file:
                     if "basic" in line:
                       # Assuming the parameter value is immediately after the '=' sign
