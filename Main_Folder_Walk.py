@@ -25,9 +25,9 @@ import imageio
 import tifffile
 import numpy as np
 import time
-
+from matplotlib import pyplot as plt
 # External codes
-from Thorlabs_tif_stks import read_tif_stack, stack_tif_images
+from Thorlabs_tif_stks import read_tif_stack, stack_tif_images, tif2png
 from image_stats_generator import calculate_snr_frequency_domain, calculate_simple_snr
 
 # define the variables to look for:
@@ -114,6 +114,18 @@ for root, _, files in os.walk(rtdir):
                     if "FT" in line:
                       FTSNR = line.split('=')[1].strip()
                       print(f"FTSNR = {FTSNR}")
+
+            ## Step 4: Create .png file from the .tif file using tif2png
+            tif_file = os.path.join(root, "DATA", chan, f"{chan}_stk_avg.tif")
+            png_file = os.path.join(root, "DATA", chan, f"{chan}_stk_avg.png")
+            if os.path.isfile(tif_file):
+                print(f"Yes, tiffile exists: {tif_file}")
+                if os.path.isfile(png_file):
+                    print(f"{png_file} already exists. Skipped...")
+                else:
+                    print(f"Creating .png file from {tif_file}")
+                    tif2png(tif_file, png_file)
+
                       
                 
                 

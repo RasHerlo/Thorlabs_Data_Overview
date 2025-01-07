@@ -17,6 +17,8 @@ import tifffile
 import os
 import re
 import numpy as np
+from PIL import Image
+from matplotlib import pyplot as plt
 
 
 def read_tif_stack(filename):
@@ -92,3 +94,31 @@ def stack_tif_images(root, chan):
 
     # Write the stacked image to a new .tif file
     tifffile.imwrite(os.path.join(root, "Data", chan, f"{chan}_stk.tif"), image_stack)
+
+def tif2png(tif_file, png_file):
+    # Load the 16-bit TIFF image
+    img = Image.open(tif_file)
+    img_array = np.array(img)
+    # Display the image with the desired colormap (replace 'coolwarm' with your choice)
+    plt.imshow(img_array, cmap='coolwarm')
+    # plt.draw()  # Force the figure to render (might be for Jupiter notebook only)
+    # Get the image data
+    # img_data = plt.gcf().canvas.tostring_rgb()
+
+    plt.savefig(png_file)
+
+    plt.close()
+
+    ## Consider adding the rest of the editions if pdf-format doesn't work...
+
+    # # Convert the image data to a PIL Image
+    # width, height = plt.gcf().canvas.get_width_height()
+    # img = Image.frombytes('RGB', (width, height), img_data)
+
+    # # Normalize the image data to the 0-255 range (if necessary)
+    # # img = img.point(lambda p: p * 255.0 / 65535.0)  # For 16-bit images
+
+    # # Save the image as PNG
+    # img.save(png_file)
+    
+    # print(f"{png_file} generated")
