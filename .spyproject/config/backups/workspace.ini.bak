@@ -4,7 +4,11 @@ save_data_on_exit = True
 save_history = True
 save_non_project_files = False
 project_type = 'empty-project-type'
+<<<<<<< HEAD
 recent_files = ['..\\.spyder-py3\\temp.py', 'Main_Folder_Walk.py', 'Thorlabs_tif_stks.py', 'TestSample_Cleaning.py']
+=======
+recent_files = ['Main_Folder_Walk.py', 'TestSample_Cleaning.py', 'Trial_Module.py', 'Trial_Run.py']
+>>>>>>> 2baa53ab86e065163f4f9e50f08de30c261ce69d
 
 [main]
 version = 0.2.0
