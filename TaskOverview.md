@@ -11,5 +11,14 @@ having to commit via bash (which takes a loooong time)
  
  
 
+OVERALL RUNNING ISSUES:
+
+- Align the interpreters on the various work-stations (How?)
+(see the fundamental issues in Notion: )
+
+- How to establish an environment with the repo, which also uploads/downloads through GitHub?
+
+- 
+
 
 
