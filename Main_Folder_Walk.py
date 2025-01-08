@@ -29,6 +29,7 @@ from matplotlib import pyplot as plt
 # External codes
 from Thorlabs_tif_stks import read_tif_stack, stack_tif_images, tif2png
 from image_stats_generator import calculate_snr_frequency_domain, calculate_simple_snr
+from PDF_report_generator import create_pdf_report
 
 # define the variables to look for:
 chans = ['ChanA','ChanB'] # make it applicable for both 1- and 2-color imaging
@@ -128,6 +129,10 @@ for root, _, files in os.walk(rtdir):
                     print(f"Creating .png file from {tif_file}")
                     tif2png(tif_file, png_file)
 
+## Step 5: Create the pdf file with info and images (after generating them)
+# Step 5a: Check if the pdf file is written
+
+create_pdf_report(rtdir)
                       
                 
                 
