@@ -25,7 +25,7 @@ import imageio
 import tifffile
 import numpy as np
 import time
-from matplotlib import pyplot as plt
+
 # External codes
 from Thorlabs_tif_stks import read_tif_stack, stack_tif_images, tif2png
 from image_stats_generator import calculate_snr_frequency_domain, calculate_simple_snr
