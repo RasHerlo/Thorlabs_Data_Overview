@@ -81,6 +81,8 @@ for root, _, files in os.walk(rtdir):
                 print("Average tif-file is made from stack")
                 
             if not os.path.isfile(os.path.join(chandir, f"{chan}_stk_avg.jpg")):
+                tif_stk = read_tif_stack(os.path.join(chandir, f"{chan}_stk.tif"))
+                tif_stk_avg = np.mean(tif_stk, axis=0)
                 # Save the array as a JPEG image
                 imageio.imwrite(os.path.join(chandir, f"{chan}_stk_avg.jpg"), tif_stk_avg.astype(np.uint8))
             
