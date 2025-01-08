@@ -34,4 +34,5 @@ def read_txt_snrs(filepath):
         if "FT" in line:
           FTSNR = line.split('=')[1].strip()
           print(f"FTSNR = {FTSNR}")
+          
   return SNR, FTSNR
