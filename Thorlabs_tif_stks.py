@@ -45,7 +45,7 @@ def stack_tif_images(root, chan):
     first_image = tifffile.imread(os.path.join(root, tif_files[0]), key=0)  # Read the first page
     image_shape = first_image.shape
 
-    print(image_shape)
+    print(f"Image_shape = {image_shape}, and 'stack_tif_images' has been initiated...")
 
     # # # Ensure consistent image format
     for file in tif_files:
@@ -66,7 +66,7 @@ def stack_tif_images(root, chan):
     longest_string = max(file_nums, key=len)
     max_len = len(longest_string)
 
-    print(max_len)
+    # print(max_len)
 
     pad_files = []
     for file in tif_files:
@@ -90,7 +90,7 @@ def stack_tif_images(root, chan):
         image = tifffile.imread(os.path.join(root,tif_files[indices[i]]), key=0)
         image_stack[i] = image
 
-    print(np.shape(image_stack))
+    # print(np.shape(image_stack))
 
     # Write the stacked image to a new .tif file
     tifffile.imwrite(os.path.join(root, "Data", chan, f"{chan}_stk.tif"), image_stack)
