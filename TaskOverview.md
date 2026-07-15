@@ -20,5 +20,44 @@ OVERALL RUNNING ISSUES:
 
 - 
 
+TRACKING:
 
+- Delete early shape reports of tifs
+- Delete "Yes, tiffile exist: xxxxxxxxx.tif"
+
+- Inform about processes and steps for each walk branch
+    - Record the time to assess the most time-consuming steps
+
+TROUBLESHOOTING:
+
+- consider implementing cProfile, line profiler of pdb to get an overview of why certain modules are stalling:
+
+import cProfile
+
+def my_slow_function():
+    # Your code here
+
+cProfile.run('my_slow_function()') 
+
+---
+
+from line_profiler import LineProfiler
+
+def my_slow_function():
+    # Your code here
+
+profiler = LineProfiler()
+profiler.add_function(my_slow_function)
+profiler.run('my_slow_function()')
+profiler.print_stats() 
+
+---
+
+import pdb
+
+def my_slow_function():
+    pdb.set_trace() 
+    # Your code here
+
+my_slow_function()
 
