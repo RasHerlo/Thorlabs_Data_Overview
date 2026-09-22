@@ -10,7 +10,7 @@ Created on Thu Dec 12 16:38:49 2024
 # input: raw datafiles (with bad numbering)
 # output: saved .stk for each identified channel
 
-# FUNCTIONS":
+# FUNCTIONS:
 # read_tif_stack
 import tifffile
 # stack_tif_images
@@ -18,6 +18,8 @@ import os
 import re
 import numpy as np
 from PIL import Image
+import matplotlib
+matplotlib.use("Agg")
 from matplotlib import pyplot as plt
 
 
@@ -34,18 +36,24 @@ def read_tif_stack(filename):
     with tifffile.TiffFile(filename) as tif:
         return tif.asarray()
     
-def stack_tif_images(root, chan):
+def stack_tif_images(root, chan, output_dir=None, log=print):
 
     # root = "C:\\Users\\svw191\\PythonFiles\\PythonTrial\\LED +APs 240926\\240926_pl100_pc001_LED+APs500microW_ex01\\"
     # chan = "ChanA"
 
+    if output_dir is None:
+        output_dir = os.path.join(root, "DATA", chan)
+    os.makedirs(output_dir, exist_ok=True)
+
     # Get a list of .tif files containing the search string
     tif_files = [f for f in os.listdir(root) if (f.endswith('.tif') or f.endswith('.ti')) and chan in f and 'Preview' not in f]
+    if not tif_files:
+        raise FileNotFoundError(f"No {chan} TIFF files found in {root}")
 
     first_image = tifffile.imread(os.path.join(root, tif_files[0]), key=0)  # Read the first page
     image_shape = first_image.shape
 
-    print(f"Image_shape = {image_shape}, and 'stack_tif_images' has been initiated...")
+    log(f"Image_shape = {image_shape}, stacking {len(tif_files)} {chan} file(s)...")
 
     # # # Ensure consistent image format
     for file in tif_files:
@@ -93,7 +101,7 @@ def stack_tif_images(root, chan):
     # print(np.shape(image_stack))
 
     # Write the stacked image to a new .tif file
-    tifffile.imwrite(os.path.join(root, "Data", chan, f"{chan}_stk.tif"), image_stack)
+    tifffile.imwrite(os.path.join(output_dir, f"{chan}_stk.tif"), image_stack)
 
 def tif2png(tif_file, png_file):
     # Load the 16-bit TIFF image

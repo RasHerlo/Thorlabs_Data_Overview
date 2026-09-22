@@ -15,6 +15,8 @@ import os
 def read_txt_snrs(filepath):
     
   data_path = os.path.dirname(filepath)
+  SNR = "N/A"
+  FTSNR = "N/A"
 
   print(f"Data_path = {data_path}")
 
@@ -22,9 +24,6 @@ def read_txt_snrs(filepath):
       print("file does not exist yet")
       
   else:
-    with open(os.path.join(data_path, 'stats.txt'), 'r') as file:
-        content = file.read()
-        
     with open(os.path.join(data_path,'stats.txt'), 'r') as file:
       for line in file:
         if "basic" in line:

@@ -9,3 +9,8 @@ __pycache__/
 # Virtual environment
 .venv/
 Thorlabs_Data_Overview_venv/
+thorlabs_env/
+
+# Frozen app output
+build/
+dist/
